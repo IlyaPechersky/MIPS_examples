@@ -1,22 +1,30 @@
 .data
-str1: .asciiz "Print three integers \n"
+pi: .float 3.14159
+fourPtZero: .float 4.0
+threePtZero: .float 3.0
+radius: .float 17.25
+surfaceArea: .float 0.0
+volume: .float 0.0
 
 .text
+.globl main
 main:
-      la   $a0, str1      
-      li   $v0, 4          
-      syscall          
-      li   $v0, 5
-      syscall
-      move $a0, $v0  
-      li   $v0, 5
-      syscall
-      move $a1, $v0 
-      li   $v0, 5
-      syscall
-      move $a2, $v0   
-      add  $a0, $a0, $a1
-      add  $a0, $a0, $a2
-      li   $v0, 1
-      syscall
-        
+l.s $f2, fourPtZero
+l.s $f4, pi
+mul.s $f4, $f2, $f4, 
+l.s $f6, radius
+
+mul.s $f8, $f6, $f6
+mul.s $f8, $f4, $f8
+s.s $f8, surfaceArea
+
+l.s $f8, threePtZero
+div.s $f2, $f4, $f8
+mul.s $f10, $f6, $f6
+mul.s $f10, $f10, $f6
+mul.s $f12, $f2, $f10
+s.s $f12, volume
+
+li $v0, 10
+syscall
+.end main
